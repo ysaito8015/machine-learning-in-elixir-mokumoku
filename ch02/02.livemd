@@ -1,0 +1,68 @@
+# ch02. Get Comfortable with Nx
+
+## Section
+
+```elixir
+Mix.install([
+  {:nx, "~>0.5"},
+  {:exla, "~>0.5"},
+  {:benchee, github: "bencheeorg/benchee", override: true}
+])
+```
+
+```elixir
+Nx.tensor([1, 2, 3])
+```
+
+```elixir
+a = Nx.tensor([[1, 2, 3], [4, 5, 6]])
+b = Nx.tensor(1.0)
+c = Nx.tensor([[[[[[1.0, 2]]]]]])
+
+dbg(a)
+dbg(b)
+dbg(c)
+```
+
+```elixir
+a = Nx.tensor([1, 2, 3])
+b = Nx.tensor([1.0, 2.0, 3.0])
+dbg(a)
+dbg(b)
+```
+
+```elixir
+Nx.tensor(0.0000000000000000000000000000000000000000000001)
+```
+
+```elixir
+Nx.tensor(1.0e-45)
+```
+
+```elixir
+Nx.tensor(1.0e-46, type: {:f, 64})
+```
+
+```elixir
+Nx.tensor(128, type: {:s, 8})
+```
+
+```elixir
+Nx.tensor([1.0, 2, 3])
+```
+
+```elixir
+a = Nx.tensor([1, 2])
+b = Nx.tensor([[1, 2], [3, 4]])
+c = Nx.tensor([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+```
+
+```elixir
+dbg(a)
+dbg(b)
+dbg(c)
+```
+
+```elixir
+Nx.tensor(10)
+```
