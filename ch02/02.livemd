@@ -66,3 +66,121 @@ dbg(c)
 ```elixir
 Nx.tensor(10)
 ```
+
+```elixir
+Nx.tensor([[1,2,3], [4,5,6]], names: [:x, :y])
+```
+
+```elixir
+a = Nx.tensor([[1,2,3], [4,5,6]])
+
+Nx.to_binary(a)
+```
+
+```elixir
+<<1::64-signed-native, 2::64-signed-native, 3::64-signed-native>>
+|> Nx.from_binary({:s, 64})
+```
+
+```elixir
+<<1::64-signed-native, 2::64-signed-native, 3::64-signed-native>>
+|> Nx.from_binary({:s, 64})
+|> Nx.reshape({1,3})
+```
+
+#### 2.2 Using Nx Operations
+
+1. shape and type operations
+2. element-wise unary operations
+3. element-wise binary operations
+4. reductions
+
+<!-- livebook:{"break_markdown":true} -->
+
+##### 1. Shape and Type Operations
+
+```elixir
+a = Nx.tensor([1,2,3])
+```
+
+```elixir
+a
+|> Nx.as_type({:f, 32})
+|> Nx.reshape({1,3,1})
+```
+
+```elixir
+a
+```
+
+```elixir
+dbg(Nx.bitcast(a, {:f, 64}))
+
+dbg(a)
+```
+
+```elixir
+a
+```
+
+##### 2. Element-wise Unary Operations
+
+<!-- livebook:{"break_markdown":true} -->
+
+####
+
+```elixir
+a = [-1,-2,-3,0,1,2,3]
+Enum.map(a, &abs/1)
+```
+
+```elixir
+a = Nx.tensor(
+  [
+    [
+      [-1,-2,-3],
+      [-4,-5,-6]
+    ],
+    [
+      [1,2,3],
+      [4,5,6]
+    ]
+  ]
+)
+```
+
+```elixir
+Nx.abs(a)
+```
+
+##### 3. Element-wise Binary Operations
+
+```elixir
+a = [1,2,3]
+b = [4,5,6]
+Enum.zip_with(a, b, fn x,y -> x + y end)
+```
+
+```elixir
+a = Nx.tensor(
+  [
+    [1,2,3],
+    [4,5,6]
+  ]
+)
+
+b = Nx.tensor(
+  [
+    [6,7,8],
+    [9,10,11]
+  ]
+)
+```
+
+```elixir
+Nx.add(a, b)
+```
+
+```elixir
+Nx.multiply(a, b)
+```
