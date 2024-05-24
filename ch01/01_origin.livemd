@@ -1,6 +1,6 @@
 <!-- livebook:{"persist_outputs":true} -->
 
-# Make Machines Learn
+# 機械に学習させる
 
 ```elixir
 Mix.install([
@@ -11,7 +11,7 @@ Mix.install([
 ])
 ```
 
-## Working with data
+## データフレーム
 
 ```elixir
 require Explorer.DataFrame, as: DF
@@ -40,7 +40,7 @@ iris = Explorer.Datasets.iris()
 >
 ```
 
-### Preparing the data for training
+### 学習用のデータを準備する
 
 ```elixir
 normalized_iris =
@@ -91,7 +91,7 @@ shuffled_normalized_iris = DF.shuffle(normalized_iris)
 >
 ```
 
-#### Splitting into train and test sets
+#### トレーニング用データとテスト用データに分ける
 
 ```elixir
 train_df = DF.slice(shuffled_normalized_iris, 0..119)
@@ -116,7 +116,7 @@ test_df = DF.slice(shuffled_normalized_iris, 120..149)
 >
 ```
 
-#### Converting DataFrame to Tensor
+#### テンソルに変換する
 
 ```elixir
 feature_columns = [
@@ -187,9 +187,9 @@ y_test =
 >
 ```
 
-## Multinomial Logistic Regression with Axon
+## Axon を使った多項ロジスティック回帰
 
-#### Defining the model
+#### まずはモデル定義
 
 ```elixir
 model =
@@ -211,7 +211,7 @@ model =
 Axon.Display.as_graph(model, Nx.template({1, 4}, :f32))
 ```
 
-#### Declaring the input pipeline
+#### インプットパイプラインを宣言
 
 ```elixir
 data_stream =
@@ -226,7 +226,7 @@ data_stream =
 #Function<51.6935098/2 in Stream.repeatedly/1>
 ```
 
-#### Running the training loop
+#### 学習ループを回す
 
 ```elixir
 trained_model_state =
@@ -273,7 +273,7 @@ Epoch: 9, Batch: 450, accuracy: 0.9630468 loss: 0.2551444
 }
 ```
 
-## Evaluating the trained model
+## 学習済みモデルの評価
 
 ```elixir
 data = [{x_test, y_test}]
@@ -303,7 +303,7 @@ Batch: 0, accuracy: 0.9000000
 }
 ```
 
-## Bringing it to Life
+## 学習済みモデルの書き出し
 
 ```elixir
 serialized_model_state = Nx.serialize(trained_model_state)
